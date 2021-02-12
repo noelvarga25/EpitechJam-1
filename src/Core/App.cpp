@@ -13,15 +13,13 @@ namespace Core {
 
     // Construction of Object
     App::App() :
-        m_screen(sf::VideoMode(SIZE_X, SIZE_Y), "Project X"),
+        m_screen(sf::VideoMode(SIZE_X, SIZE_Y), "Monkey Time Warp 3"),
         m_view(sf::Vector2f(SIZE_X / 2, SIZE_Y / 2), sf::Vector2f(SIZE_X * 1.5, SIZE_Y * 1.5)),
         m_data(), m_menu()
     {
         std::cout << "[APP]::[constructor]" << std::endl;
         m_screen.setView(m_view);
         m_menu.load("./bin/menu/main.omn", m_data);
-        m_map = std::make_unique<Game::Map>();
-        m_map->load(1, m_data);
     }
 
     App::~App()
@@ -58,7 +56,6 @@ namespace Core {
     void App::display()
     {
         m_screen.clear(sf::Color::White);
-        m_screen.draw(*m_map);
         m_screen.draw(m_menu);
         m_screen.display();
     }

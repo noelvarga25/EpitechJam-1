@@ -1,3 +1,4 @@
 SFML-WIN
 *.dll
 .vscode
+*.o
