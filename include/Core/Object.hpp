@@ -44,6 +44,9 @@ namespace Core {
             virtual sf::Vector2f getScale();
             virtual float getRotation();
             virtual sf::Vector2f getOrigin();
+
+            virtual void updateDisplay();
+            virtual int updateEvent(sf::RenderWindow &screen, sf::Event event);
         protected:
             // Drawable
             virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
