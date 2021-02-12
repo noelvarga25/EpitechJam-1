@@ -33,10 +33,12 @@ namespace Game
             void moveLeft();
             void moveRight();
             void jump();
+            int updateEvent(sf::RenderWindow &screen, sf::Event event) override;
 
         protected:
             time _state;
             JumpState _jump;
+            sf::Clock _jumpClock;
 
     };
 

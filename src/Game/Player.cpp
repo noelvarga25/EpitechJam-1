@@ -43,7 +43,30 @@ namespace Game
 
     void Player::jump()
     {
-        this->move(0, SPEED);
+        this->move(0, -SPEED);
+    }
+
+    int Player::updateEvent(sf::RenderWindow &screen, sf::Event event) override
+    {
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.type.key == sf::Keyboard::Q)
+                this->moveLeft();
+            if (event.type.key == sf::Keyboard::D)
+                this->moveRight();
+        } else if (event.type == sf::Event::KeyReleased) {
+            if (event.type.key == sf::Keyboard::Space) {
+                if (this->_jump == None)
+                    this->_jump = Jump;
+                else if (this->_jump == Jump)
+                    this->_jump = DoubleJump;
+                else
+                    this->_jump = None;
+                this->_jumpClock.restart();
+            }
+        }
+        if (this->_jump != None)
+            this->jump();
+        return 0;
     }
 
 }
