@@ -11,8 +11,8 @@
 #include <Core/Data.hpp>
 #include <UIObject/Menu.hpp>
 
-#define SIZE_X 1280
-#define SIZE_Y 720
+#define SIZE_X 1920
+#define SIZE_Y 1080
 
 namespace Core {
     class App {

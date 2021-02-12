@@ -14,7 +14,7 @@ namespace Core {
     // Construction of Object
     App::App() :
         m_screen(sf::VideoMode(SIZE_X, SIZE_Y), "Monkey Time Warp 3"),
-        m_view(sf::Vector2f(SIZE_X / 2, SIZE_Y / 2), sf::Vector2f(SIZE_X * 1.5, SIZE_Y * 1.5)),
+        m_view(sf::Vector2f(SIZE_X / 2, SIZE_Y / 2) , sf::Vector2f(SIZE_X * 1, SIZE_Y * 1)), // Change Zoom here
         m_data("./bin/data.config"), m_menu()
     {
         std::cout << "[APP]::[constructor]" << std::endl;
