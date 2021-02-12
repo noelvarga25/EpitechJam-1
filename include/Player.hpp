@@ -7,6 +7,8 @@
 
 #pragma once
 
+#define SPEED=10
+
 namespace Game
 {
 
@@ -27,6 +29,7 @@ namespace Game
             void setTimeState(TIMESTATE newState);
 
             void moveLeft();
+            void moveRight();
 
         protected:
             TIMESTATE _state;

@@ -7,8 +7,6 @@
 
 #include "Player.hpp"
 
-#define SPEED=10
-
 namespace Game
 {
 
