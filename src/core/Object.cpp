@@ -1,4 +1,11 @@
-#include <Core/Object.hpp>
+/*
+** EPITECH PROJECT, 2021
+** EpitechJam-1
+** File description:
+** Object
+*/
+
+#include "Core/Object.hpp"
 
 namespace Core {
     Object::Object() {
@@ -35,9 +42,6 @@ namespace Core {
     sf::Vector2f Object::getScale()       { return m_sprt.getScale();       }
     float Object::getRotation()           { return m_sprt.getRotation();    }
     sf::Vector2f Object::getOrigin()      { return m_sprt.getOrigin();      }
-
-    void Object::updateDisplay() {}
-    int Object::updateEvent(sf::RenderWindow &screen, sf::Event event)  { return DEFAULT_OBJECT_ID; }
 
     void Object::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         target.draw(m_sprt, states);

@@ -7,7 +7,8 @@
 
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <Core/Transformable.hpp>
+#include <iostream>
+#include "Core/Transformable.hpp"
 
 #define DEFAULT_OBJECT_ID -1
 
@@ -43,9 +44,6 @@ namespace Core {
             virtual sf::Vector2f getScale();
             virtual float getRotation();
             virtual sf::Vector2f getOrigin();
-
-            virtual void updateDisplay();
-            virtual int updateEvent(sf::RenderWindow &screen, sf::Event event);
         protected:
             // Drawable
             virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
