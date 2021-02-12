@@ -1,0 +1,28 @@
+size:   32x80
+<past>
+    asset:  name
+    <background>
+        0:1:2
+    </background>
+    <platfrom>
+        0:1:2
+    </platfrom>
+</past>
+<present>
+    asset:  name
+    <background>
+        0:1:2
+    </background>
+    <platfrom>
+        0:1:2
+    </platfrom>
+</present>
+<futur>
+    asset:  name
+    <background>
+        0:1:2
+    </background>
+    <platfrom>
+        0:1:2
+    </platfrom>
+</futur>
