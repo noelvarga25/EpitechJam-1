@@ -7,13 +7,14 @@
 
 #pragma once
 
-#include "TimeStamp.hpp"
+#include "Core/Object.hpp"
+#include "Game/TimeStamp.hpp"
 #define SPEED=10
 
 namespace Game
 {
 
-    class Player: public Object
+    class Player: public Core::Object
     {
         public:
             Player();
