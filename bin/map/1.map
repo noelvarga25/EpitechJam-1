@@ -1,28 +1,32 @@
-size:   32x80
+size:       32x80
+tile_size:  1x3
 <past>
-    asset:  name
+    asset_bg:    0
+    asset_plat:  0
     <background>
-        0:1:2
+        0:0:0
     </background>
     <platfrom>
-        0:1:2
+        1:1:1
     </platfrom>
 </past>
 <present>
-    asset:  name
+    asset_bg:    0
+    asset_plat:  0
     <background>
-        0:1:2
+        0:0:0
     </background>
     <platfrom>
-        0:1:2
+        1:1:1
     </platfrom>
 </present>
 <futur>
-    asset:  name
+    asset_bg:    0
+    asset_plat:  0
     <background>
-        0:1:2
+        0:0:0
     </background>
     <platfrom>
-        0:1:2
+        1:1:1
     </platfrom>
 </futur>
