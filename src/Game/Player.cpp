@@ -10,9 +10,10 @@
 namespace Game
 {
 
-    Player::Player(): Object()
+    Player::Player(): _jumpClock(), Object()
     {
-
+        _jump = None;
+        _state = Present;
     }
 
     Player::~Player()
@@ -38,6 +39,11 @@ namespace Game
     void Player::moveRight()
     {
         this->move(SPEED, 0);
+    }
+
+    void Player::jump()
+    {
+        this->move(0, SPEED);
     }
 
 }

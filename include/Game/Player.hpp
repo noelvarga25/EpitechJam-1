@@ -13,6 +13,12 @@
 
 namespace Game
 {
+    enum JumpState
+    {
+        None,
+        Jump,
+        DoubleJump
+    };
 
     class Player: public Core::Object
     {
@@ -26,9 +32,11 @@ namespace Game
 
             void moveLeft();
             void moveRight();
+            void jump();
 
         protected:
             time _state;
+            JumpState _jump;
 
     };
 
