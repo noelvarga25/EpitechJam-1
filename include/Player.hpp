@@ -9,6 +9,8 @@
 
 #define SPEED=10
 
+#include "Core/Object.hpp"
+
 namespace Game
 {
 
@@ -18,7 +20,7 @@ namespace Game
         FUTUR
     };
 
-    class Player: public Object
+    class Player: public Core::Object
     {
         public:
             Player();
