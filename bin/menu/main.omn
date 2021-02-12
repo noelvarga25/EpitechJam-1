@@ -1,0 +1,10 @@
+<Background>
+txtr: 0
+pos: 0;0
+</Background>
+<Button>
+id: 0
+txtr: 0
+pos: 100;100
+rotate: 0
+</Button>
