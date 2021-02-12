@@ -8,8 +8,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <Core/Transformable.hpp>
-#include <Error.hpp>
-#include <Tool.hpp>
 
 #define DEFAULT_OBJECT_ID -1
 
