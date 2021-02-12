@@ -19,12 +19,14 @@ namespace Game {
         public:
             Engine();
             ~Engine();
-            int load(std::string file);
+            void load(std::string config, Core::Data &data);
             int run();
         private:
+            void loadScene(std::ifstream &file, Core::Data &data);
+            std::vector<std::vector<int>> readTile(std::ifstream &file, std::string breaker);
             std::vector<std::unique_ptr<Scene>> m_scene;
-            sf::View m_view;
-            sf::RenderWindow m_screen;
+            sf::Vector2i m_dim;
+            sf::Vector2i m_tile_dim;
             // player
     };
 }
