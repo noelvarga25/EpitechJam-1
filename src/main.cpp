@@ -5,3 +5,10 @@
 ** main
 */
 
+#include <Core/App.hpp>
+
+int main() {
+    Core::App app;
+
+    return app.run();
+}
