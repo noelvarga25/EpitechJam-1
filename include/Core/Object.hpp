@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Core/Transformable.hpp"
+#include "Tool.hpp"
 
 #define DEFAULT_OBJECT_ID -1
 
@@ -47,6 +48,7 @@ namespace Core {
 
             virtual void updateDisplay();
             virtual int updateEvent(sf::RenderWindow &screen, sf::Event event);
+            bool transformableLoad(std::string type, std::string param);
         protected:
             // Drawable
             virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

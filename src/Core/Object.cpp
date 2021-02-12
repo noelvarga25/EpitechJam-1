@@ -43,7 +43,29 @@ namespace Core {
     float Object::getRotation()           { return m_sprt.getRotation();    }
     sf::Vector2f Object::getOrigin()      { return m_sprt.getOrigin();      }
 
+    void Object::updateDisplay() {}
+    int Object::updateEvent(sf::RenderWindow &screen, sf::Event event)  { return DEFAULT_OBJECT_ID; }
+
     void Object::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         target.draw(m_sprt, states);
     }
+
+    bool Object::transformableLoad(std::string type, std::string param)
+    {
+        sf::Vector2f vec = Tool::atovec(param);
+
+        if (type == "pos:") {
+            m_sprt.setPosition(vec);
+        } else if (type == "rotate:") {
+            m_sprt.setRotation(std::atof(param.c_str()));
+        } else if (type == "scale:") {
+            m_sprt.setScale(vec);
+        } else if (type == "origin") {
+            m_sprt.setOrigin(vec);
+        } else {
+            return false;
+        }
+        return true;
+    }
+
 }

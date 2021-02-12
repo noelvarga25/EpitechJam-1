@@ -11,6 +11,7 @@ P_UIOBJECT	=	src/UIObject
 
 SRC			=	$(P_CORE)/Data.cpp \
 				$(P_CORE)/Object.cpp \
+				$(P_CORE)/App.cpp \
 				$(P_GAME)/Engine.cpp \
 				$(P_UIOBJECT)/Anim.cpp \
 				$(P_UIOBJECT)/Button.cpp \
@@ -23,7 +24,7 @@ OBJ			=	$(SRC:.cpp=.o)
 
 CPPFLAGS	=	-Iinclude
 
-NAME		=	Monkey Time Warp 3
+NAME		=	"Monkey Time Warp 3"
 
 all:		$(NAME)
 
