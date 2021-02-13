@@ -116,6 +116,8 @@ namespace Game
             move(0, -(tan(cos(0.5 * 6.28))) * 10);
         } else {
             _jump = None;
+            if ((_leftPressed == true && _rightPressed == false) || (_leftPressed == false && _rightPressed == true))
+                _animRect.top = 0;
             setPosition(getPosition().x, 720);
         }
     }
@@ -127,6 +129,7 @@ namespace Game
                 _animClock.restart();
                 _leftPressed = true;
                 _animRect.top = 0;
+                _animRect.left = 0;
                 setScale(-1, 1);
                 _playerState = Left;
             }
@@ -134,6 +137,7 @@ namespace Game
                 _animClock.restart();
                 _rightPressed = true;
                 _animRect.top = 0;
+                _animRect.left = 0;
                 setScale(1, 1);
                 _playerState = Right;
             }
@@ -142,11 +146,13 @@ namespace Game
                     _jump = Jump;
                     _animClock.restart();
                     _animRect.top = 64;
+                    _animRect.left = 0;
                     _jumpClock.restart();
                 } else if (_jump == Jump || _jump == Fall) {
                     _jump = DoubleJump;
                     _animClock.restart();
                     _animRect.top = 96;
+                    _animRect.left = 0;
                     _jumpClock.restart();
                 }
                 _spacePressed = true;
