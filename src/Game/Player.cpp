@@ -110,13 +110,13 @@ namespace Game
             _animRect.top = 64;
             setTextureRect(_animRect);
         }
-        if (getPosition().y < 1048) {
+        if (getPosition().y < 720) {
             if (_jump == None)
                 _jump = Fall;
             move(0, -(tan(cos(0.5 * 6.28))) * 10);
         } else {
             _jump = None;
-            setPosition(getPosition().x, 1048);
+            setPosition(getPosition().x, 720);
         }
     }
 
@@ -165,11 +165,6 @@ namespace Game
             if (event.key.code == sf::Keyboard::D)
                 _rightPressed = false;
         }
-        if (_jump == None && _leftPressed == false && _rightPressed == false) {
-            _playerState = Idle;
-            _animRect.left = 0;
-            _animRect.top = 32;
-        }
         return 0;
     }
 
@@ -189,6 +184,11 @@ namespace Game
 
     void Player::updatePos()
     {
+        if (_jump == None && _leftPressed == false && _rightPressed == false) {
+            _playerState = Idle;
+            _animRect.left = 0;
+            _animRect.top = 32;
+        }
         if (_jump == Jump || _jump == DoubleJump)
             jump();
         else
