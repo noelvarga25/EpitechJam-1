@@ -9,7 +9,7 @@
 
 #include "Core/Object.hpp"
 #include "Game/TimeStamp.hpp"
-#define SPEED=10
+#define SPEED 10
 
 namespace Game
 {
@@ -17,7 +17,9 @@ namespace Game
     {
         None,
         Jump,
-        DoubleJump
+        DoubleJump,
+        Fall,
+        DoubleFall
     };
 
     class Player: public Core::Object
@@ -33,12 +35,16 @@ namespace Game
             void moveLeft();
             void moveRight();
             void jump();
+            void fall();
             int updateEvent(sf::RenderWindow &screen, sf::Event event) override;
+            void updatePos();
 
         protected:
             time _state;
             JumpState _jump;
             sf::Clock _jumpClock;
+            bool rightPressed;
+            bool leftPressed;
 
     };
 
