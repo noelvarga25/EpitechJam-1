@@ -22,6 +22,14 @@ namespace Game
         DoubleFall
     };
 
+    enum PlayerState
+    {
+        Idle,
+        Right,
+        Left,
+        onJump
+    };
+
     class Player: public Core::Object
     {
         public:
@@ -38,13 +46,18 @@ namespace Game
             void fall();
             int updateEvent(sf::RenderWindow &screen, sf::Event event) override;
             void updatePos();
+            void idleAnim();
 
         protected:
             time _state;
             JumpState _jump;
+            PlayerState _playerState;
             sf::Clock _jumpClock;
-            bool rightPressed;
-            bool leftPressed;
+            sf::Clock _animClock;
+            sf::IntRect _animRect;
+            bool _rightPressed;
+            bool _leftPressed;
+            bool _spacePressed;
 
     };
 

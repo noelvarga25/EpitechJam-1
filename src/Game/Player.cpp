@@ -11,10 +11,14 @@
 namespace Game
 {
 
-    Player::Player(): _jumpClock(), Object()
+    Player::Player(): _jumpClock(), _animClock(), _animRect(0, 32, 32, 32), Object()
     {
         _jump = None;
         _state = Present;
+        _spacePressed = false;
+        _leftPressed = false;
+        _rightPressed = false;
+        _playerState = Idle;
     }
 
     Player::~Player()
@@ -24,22 +28,40 @@ namespace Game
 
     void Player::setTimeState(time newState)
     {
-        this->_state = newState;
+        _state = newState;
     }
 
     time Player::getTimeState() const
     {
-        return this->_state;
+        return _state;
     }
 
     void Player::moveLeft()
     {
-        this->move(-SPEED, 0);
+        sf::Time time = _animClock.getElapsedTime();
+
+        if (time.asSeconds() > 0.05) {
+            _animRect.left += 32;
+            if (_animRect.left >= 608)
+                _animRect.left = 0;
+            setTextureRect(_animRect);
+            _animClock.restart();
+        }
+        move(-SPEED, 0);
     }
 
     void Player::moveRight()
     {
-        this->move(SPEED, 0);
+        sf::Time time = _animClock.getElapsedTime();
+
+        if (time.asSeconds() > 0.05) {
+            _animRect.left += 32;
+            if (_animRect.left >= 608)
+                _animRect.left = 0;
+            setTextureRect(_animRect);
+            _animClock.restart();
+        }
+        move(SPEED, 0);
     }
 
     float velocity(sf::Time time)
@@ -52,64 +74,130 @@ namespace Game
 
     void Player::jump()
     {
-        sf::Time time = this->_jumpClock.getElapsedTime();
+        sf::Time time = _jumpClock.getElapsedTime();
+        sf::Time timeA = _animClock.getElapsedTime();
 
-        if (time.asSeconds() < 0.5)
-            this->move(0, velocity(time));
-        else {
-            if (this->_jump == Jump)
-                this->_jump = Fall;
-            else if (this->_jump == DoubleJump)
-                this->_jump = DoubleFall;
+        if (time.asSeconds() < 0.5) {
+            move(0, velocity(time));
+            if (_jump == Jump && timeA.asSeconds() > 0.05) {
+                if (_animRect.left < 416)
+                    _animRect.left += 32;
+                setTextureRect(_animRect);
+            } else if (_jump == DoubleJump && timeA.asSeconds() > 0.05) {
+                _animRect.left += 32;
+                if (_animRect.left >= 512) {
+                    _animRect.left = 416;
+                    _animRect.top = 64;
+                }
+                setTextureRect(_animRect);
+                _animClock.restart();
+            }
+        } else {
+            if (_jump == Jump) {
+                _jump = Fall;
+                _animRect.left = 416;
+                setTextureRect(_animRect);
+            } else if (_jump == DoubleJump) {
+                _jump = DoubleFall;
+            }
         }
     }
 
     void Player::fall()
     {
-        if (this->getPosition().y < 1048) {
-            if (this->_jump == None)
-                this->_jump = Fall;
-            this->move(0, -(tan(cos(0.5 * 6.28))) * 10);
+        if (_jump == Fall || _jump == DoubleFall) {
+            _animRect.left = 416;
+            _animRect.top = 64;
+            setTextureRect(_animRect);
+        }
+        if (getPosition().y < 1048) {
+            if (_jump == None)
+                _jump = Fall;
+            move(0, -(tan(cos(0.5 * 6.28))) * 10);
         } else {
-            this->_jump = None;
-            this->setPosition(this->getPosition().x, 1048);
+            _jump = None;
+            setPosition(getPosition().x, 1048);
         }
     }
 
     int Player::updateEvent(sf::RenderWindow &screen, sf::Event event)
     {
         if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Q)
-                this->leftPressed = true;
-            if (event.key.code == sf::Keyboard::D)
-                this->rightPressed = true;
+            if (event.key.code == sf::Keyboard::Q) {
+                _animClock.restart();
+                _leftPressed = true;
+                _animRect.top = 0;
+                setScale(-1, 1);
+                _playerState = Left;
+            }
+            if (event.key.code == sf::Keyboard::D) {
+                _animClock.restart();
+                _rightPressed = true;
+                _animRect.top = 0;
+                setScale(1, 1);
+                _playerState = Right;
+            }
+            if (event.key.code == sf::Keyboard::Space) {
+                if (_jump == None) {
+                    _jump = Jump;
+                    _animClock.restart();
+                    _animRect.top = 64;
+                    _jumpClock.restart();
+                } else if (_jump == Jump || _jump == Fall) {
+                    _jump = DoubleJump;
+                    _animClock.restart();
+                    _animRect.top = 96;
+                    _jumpClock.restart();
+                }
+                _spacePressed = true;
+                _playerState = onJump;
+            }
         } else if (event.type == sf::Event::KeyReleased) {
             if (event.key.code == sf::Keyboard::Space) {
-                if (this->_jump == None) {
-                    this->_jump = Jump;
-                    this->_jumpClock.restart();
-                } else if (this->_jump == Jump || this->_jump == Fall) {
-                    this->_jump = DoubleJump;
-                    this->_jumpClock.restart();
+               _spacePressed = false;
+                if (_jump == None && _leftPressed == false && _rightPressed == false) {
+                    _playerState = Idle;
+                    _animClock.restart();
                 }
             }
             if (event.key.code == sf::Keyboard::Q)
-                this->leftPressed = false;
+                _leftPressed = false;
             if (event.key.code == sf::Keyboard::D)
-                this->rightPressed = false;
+                _rightPressed = false;
+        }
+        if (_jump == None && _leftPressed == false && _rightPressed == false) {
+            _playerState = Idle;
+            _animRect.left = 0;
+            _animRect.top = 32;
         }
         return 0;
     }
 
+    void Player::idleAnim()
+    {
+        sf::Time time = _animClock.getElapsedTime();
+
+        _animRect.top = 32;
+        if (time.asSeconds() > 0.15) {
+            _animRect.left += 32;
+            if (_animRect.left == 672)
+                _animRect.left = 0;
+            setTextureRect(_animRect);
+            _animClock.restart();
+        }
+    }
+
     void Player::updatePos()
     {
-        if (this->_jump == Jump || this->_jump == DoubleJump)
-            this->jump();
+        if (_jump == Jump || _jump == DoubleJump)
+            jump();
         else
-            this->fall();
-        if (this->rightPressed == true)
-            this->moveRight();
-        if (this->leftPressed == true)
-            this->moveLeft();
+            fall();
+        if (_rightPressed == true && _leftPressed == false)
+            moveRight();
+        if (_leftPressed == true && _rightPressed == false)
+            moveLeft();
+        if (_playerState == Idle)
+            idleAnim();
     }
 }
