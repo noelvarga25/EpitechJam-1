@@ -46,7 +46,24 @@ namespace Core {
     }
 
     void App::updateEvent() {
-        m_menu.updateEvent(m_screen, m_event);
+        switch (m_menu.updateEvent(m_screen, m_event))
+        {
+        case 0:
+            std::cout << "Pressing START button" << std::endl;
+            /* Go to level selector loop */
+            break;
+        case 1:
+            std::cout << "Pressing SETTINGS button" << std::endl;
+            /* Go to settings */
+            break;
+        case 2:
+            std::cout << "Pressing QUIT button" << std::endl;
+            m_screen.close();
+            break;
+        default:
+            std::cout << m_menu.updateEvent(m_screen, m_event) << std::endl;
+            break;
+        }
     }
 
     void App::updateDisplay() {

@@ -90,7 +90,8 @@ namespace UIObject {
     int Menu::updateEvent(sf::RenderWindow &screen, sf::Event event)
     {
         for (auto& widget : m_widget) {
-            widget->updateEvent(screen, event);
+            if (widget->updateEvent(screen, event) != -1)
+                return widget->updateEvent(screen, event);
         }
         return DEFAULT_OBJECT_ID;
     }
