@@ -50,7 +50,8 @@ namespace Core {
         {
         case 0:
             std::cout << "Pressing START button" << std::endl;
-            /* Go to level selector loop */
+            m_menu.clear();
+            m_menu.load("./bin/menu/LevelSelector.omn", m_data);
             break;
         case 1:
             std::cout << "Pressing SETTINGS button" << std::endl;
@@ -60,8 +61,17 @@ namespace Core {
             std::cout << "Pressing QUIT button" << std::endl;
             m_screen.close();
             break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            m_menu.clear();
+            m_menu.load("./bin/menu/main.omn", m_data);
+            break;
         default:
-            std::cout << m_menu.updateEvent(m_screen, m_event) << std::endl;
             break;
         }
     }
