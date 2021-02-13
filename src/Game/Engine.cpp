@@ -56,10 +56,7 @@ namespace Game {
         while (!file.eof()) {
             file >> param;
             std::cout << "<private> [loadScene] read > " << param << std::endl;
-            if (param == "<background>") {
-                m_scene.back()->setTileBackground(readTile(file, "</background>"));
-                continue;
-            } else if (param == "<platform>") {
+            if (param == "<platform>") {
                 m_scene.back()->setTilePlatform(readTile(file, "</platform>"));
                 continue;
             } else if (param == "</" + sce_name + ">") {
