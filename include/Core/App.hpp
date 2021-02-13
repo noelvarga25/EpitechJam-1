@@ -10,6 +10,7 @@
 #include <SFML/Graphics.hpp>
 #include <Core/Data.hpp>
 #include <UIObject/Menu.hpp>
+#include "Game/Engine.hpp"
 
 #define SIZE_X 1920
 #define SIZE_Y 1080
@@ -31,5 +32,6 @@ namespace Core {
             sf::View m_view;
             Core::Data m_data;
             UIObject::Menu m_menu;
+            Game::Engine m_engine;
     };
 }

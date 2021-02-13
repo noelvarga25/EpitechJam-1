@@ -23,6 +23,7 @@ namespace Game {
             int run();
         private:
             void loadScene(std::ifstream &file, Core::Data &data);
+            virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
             std::vector<std::vector<int>> readTile(std::ifstream &file, std::string breaker);
             std::vector<std::unique_ptr<Scene>> m_scene;
             sf::Vector2i m_dim;
