@@ -1,32 +1,32 @@
-size:       32x80
-tile_size:  1x3
+size:       3x1
+tile_size:  5x5
 <past>
-    asset_bg:    0
-    asset_plat:  0
-    <background>
-        0:0:0
-    </background>
-    <platfrom>
-        1:1:1
-    </platfrom>
+asset_bg:    0
+asset_plat:  0
+<background>
+0:0:0
+</background>
+<platform>
+20:12:15
+</platform>
 </past>
 <present>
-    asset_bg:    0
-    asset_plat:  0
-    <background>
-        0:0:0
-    </background>
-    <platfrom>
-        1:1:1
-    </platfrom>
+asset_bg:    0
+asset_plat:  0
+<background>
+0:0:0
+</background>
+<platform>
+1:2:0
+</platform>
 </present>
 <futur>
-    asset_bg:    0
-    asset_plat:  0
-    <background>
-        0:0:0
-    </background>
-    <platfrom>
-        1:1:1
-    </platfrom>
+asset_bg:    0
+asset_plat:  0
+<background>
+0:0:0
+</background>
+<platform>
+1:1:1
+</platform>
 </futur>
