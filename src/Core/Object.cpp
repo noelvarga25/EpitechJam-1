@@ -33,7 +33,7 @@ namespace Core {
 
     // sf::Drawable
         // Setter
-    void Object::setTexture(sf::Texture txtr)       { m_sprt.setTexture(txtr);      }
+    void Object::setTexture(sf::Texture &txtr)       { m_sprt.setTexture(txtr);      }
     void Object::setTextureRect(sf::IntRect rect)   { m_sprt.setTextureRect(rect);  }
 
     // UIObject::Transformable

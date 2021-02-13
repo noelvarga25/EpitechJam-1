@@ -36,7 +36,7 @@ namespace Core {
             virtual void move(float x, float y);
 
             // setter
-            virtual void setTexture(sf::Texture txtr);
+            virtual void setTexture(sf::Texture &txtr);
             virtual void setTextureRect(sf::IntRect rect);
 
             // UIObject::Transformable
