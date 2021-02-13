@@ -91,7 +91,6 @@ namespace Core {
     {
         m_screen.clear(sf::Color::White);
         m_screen.draw(m_menu);
-        m_screen.draw(m_engine);
         m_screen.display();
     }
 }
