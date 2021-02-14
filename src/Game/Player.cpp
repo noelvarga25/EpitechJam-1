@@ -21,6 +21,7 @@ namespace Game
         _playerState = Idle;
         m_sprt.setTexture(data.getTexture().at(10));
         m_sprt.setTextureRect(sf::IntRect(0, 32, 32, 32));
+        setScale(2, 2);
     }
 
     Player::~Player()
@@ -132,7 +133,7 @@ namespace Game
                 _leftPressed = true;
                 _animRect.top = 0;
                 _animRect.left = 0;
-                setScale(-1, 1);
+                setScale(-2, 2);
                 _playerState = Left;
             }
             if (event.key.code == sf::Keyboard::D) {
@@ -140,7 +141,7 @@ namespace Game
                 _rightPressed = true;
                 _animRect.top = 0;
                 _animRect.left = 0;
-                setScale(1, 1);
+                setScale(2, 2);
                 _playerState = Right;
             }
             if (event.key.code == sf::Keyboard::Space) {
