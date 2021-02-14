@@ -13,12 +13,10 @@ namespace UIObject {
 
     // Constructio of Object
     Entry::Entry() : Button() {
-        std::cout << "[Entry]::[constructor]" << std::endl;
     }
 
     Entry::Entry(int id, sf::Texture &txtr, sf::Font &font, std::string def, sf::Vector2f pos) : Button(id, txtr, pos)
     {
-        std::cout << "[Entry]::[constructor]" << std::endl;
         sf::Vector2u size = m_sprt.getTexture()->getSize();
 
         m_txt.setFont(font);
@@ -34,7 +32,6 @@ namespace UIObject {
     }
 
     Entry::~Entry() {
-        std::cout << "[Entry]::[destructor]" << std::endl;
     }
 
     void Entry::setMaxChar(int max)
@@ -57,7 +54,6 @@ namespace UIObject {
         if (event.type == sf::Event::MouseButtonPressed) {
             if (rect.contains(mouse_pos)) {
                 m_focus = true;
-                std::cout << "[Event] Entry has focus" << std::endl;
                 return m_id;
             }
             m_focus = false;
@@ -66,14 +62,12 @@ namespace UIObject {
             if ((int)m_act.size() < m_msize || m_msize == -1) {
                 if ((event.text.unicode >= 48 && event.text.unicode <= 57) || (event.text.unicode >= 65 && event.text.unicode <= 90) || (event.text.unicode >= 97 && event.text.unicode <= 122) || (event.text.unicode == 95) || (event.text.unicode == 32)) {
                     char char_tmp = static_cast<char>(event.text.unicode);
-                    std::cout << "[Event] Entry add > '" << char_tmp << "'" << std::endl;
                     m_act += char_tmp;
                 }
             }
             if (event.text.unicode == 8 && m_act.size() != 0) {
                 m_act.pop_back();
             } else if (event.text.unicode == 13) {
-                std::cout << "[Event] Entry lost focus from terminate entry" << std::endl;
                 m_focus = false;
             }
             this->upSprite();

@@ -9,11 +9,9 @@
 
 namespace Core {
     Object::Object() {
-        std::cout << "[Object]::[constructor]" << std::endl;
     }
 
     Object::~Object() {
-        std::cout << "[Object]::[destructor]" << std::endl;
     }
 
     // UIObject::Transformable

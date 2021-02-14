@@ -10,12 +10,10 @@
 
 namespace UIObject {
     Anim::Anim() {
-        std::cout << "[Anim]::[constructor]" << std::endl;
     }
 
     Anim::Anim(sf::Texture &txtr, sf::Vector2u tile_size, unsigned int fps, sf::Vector2u curser) : Core::Object()
     {
-        std::cout << "[Anim]::[constructor]" << std::endl;
         m_sprt.setTexture(txtr);
         m_tile_size = tile_size;
         m_txtr_size = txtr.getSize();
@@ -30,7 +28,6 @@ namespace UIObject {
     }
 
     Anim::~Anim() {
-        std::cout << "[Anim]::[destructor]" << std::endl;
     }
 
     void Anim::setTexture(sf::Texture txtr)

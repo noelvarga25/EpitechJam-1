@@ -14,12 +14,10 @@ namespace UIObject {
     // Construction of Object
     Button::Button() : Core::Object()
     {
-        std::cout << "[Button]::[constructor]" << std::endl;
     }
 
     Button::Button(int ID, sf::Texture &m_txtr, sf::Vector2f pos)
     {
-        std::cout << "[Button]::[constructor]" << std::endl;
         m_id = ID;
         m_sprt.setTexture(m_txtr);
         m_sprt.setPosition(pos);
@@ -27,7 +25,6 @@ namespace UIObject {
 
     Button::~Button()
     {
-        std::cout << "[Button]::[destructor]" << std::endl;
     }
 
     // Getter

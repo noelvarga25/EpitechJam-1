@@ -1,0 +1,35 @@
+size:       5x5
+tile_size:  240x400
+<past>
+asset_bg:    0
+asset_plat:  9
+<platform>
+1:2:3:4:5
+401:402:403:404:405
+814:815:816:817:818
+814:815:816:817:818
+814:815:816:817:818
+</platform>
+</past>
+<present>
+asset_bg:    0
+asset_plat:  9
+<platform>
+0:0:0:0:0
+0:0:0:0:0
+0:0:0:0:0
+0:0:0:0:0
+0:0:0:0:0
+</platform>
+</present>
+<futur>
+asset_bg:    0
+asset_plat:  9
+<platform>
+0:0:0:0:0
+0:0:0:0:0
+0:0:0:0:0
+0:0:0:0:0
+0:0:0:0:0
+</platform>
+</futur>

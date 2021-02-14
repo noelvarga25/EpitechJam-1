@@ -14,20 +14,17 @@ namespace UIObject {
     // Construction of Object
 	Menu::Menu() : Core::Object()
     {
-        std::cout << "[Menu]::[constructor]" << std::endl;
         m_error = Err::Code::NONE;
         m_bgLoad = false;
     }
 
     Menu::~Menu()
     {
-        std::cout << "[Menu]::[destructor]" << std::endl;
     }
 
     // Loading of Object
     Err::Code Menu::load(std::string file, Core::Data &data)
     {
-        std::cout << "[MENU]::[load] - start -" << std::endl;
         std::string ext = file;
         std::string line;
         std::ifstream is;
@@ -46,7 +43,6 @@ namespace UIObject {
         }
         is >> line;
         while (!is.eof()) {
-            std::cout << "[MENU]::[load] read > " << line << std::endl;
             if (line == "<Button>") {
                 m_error = this->createButton(is, data);
             } else if (line == "<Background>") {
@@ -68,7 +64,6 @@ namespace UIObject {
         }
         is.close();
         m_error = Err::Code::NONE;
-        std::cout << "[MENU]::[load] - end -" << std::endl;
         return m_error;
     }
 
@@ -111,11 +106,10 @@ namespace UIObject {
 
         is >> type >> param;
         while (type != "</Button>") {
-            std::cout << "<private> [createButton] read > " << type << " " << param << std::endl;
             if (type == "txtr:") {
                 id_txtr = std::atoi(param.c_str());
                 if (id_txtr < 0 || (int)data.getTexture().size() < id_txtr) {
-                    std::cout << "<private> [createButton] Error: id texture overflow" << std::endl;
+                    std::cerr << "<private> [createButton] Error: id texture overflow" << std::endl;
                     return Err::Code::ID_TXTR_OVERFLOW;
                 }
                 txtr_build = true;
@@ -141,7 +135,6 @@ namespace UIObject {
                 is >> param;
             }
         }
-        std::cout << "<private> [createButton] - end -" << std::endl;
         return Err::Code::NONE;
     }
 
@@ -161,7 +154,6 @@ namespace UIObject {
 
         is >> type >> param;
         while (type != "</Entry>") {
-            std::cout << "<private> [createEntry] read > " << type << " " << param << std::endl;
             if (type == "txtr:") {
                 id_txtr = std::atoi(param.c_str());
                 if (id_txtr < 0 || (int)data.getTexture().size() < id_txtr) {
@@ -203,13 +195,11 @@ namespace UIObject {
                 is >> param;
             }
         }
-        std::cout << "<private> [createEntry] - end -" << std::endl;
         return Err::Code::NONE;
     }
 
     Err::Code Menu::createBackground(std::ifstream &is, Core::Data &data)
     {
-        std::cout << "<private> [createBackground] - start -" << std::endl;
         std::string type;
         std::string param;
         int id;
@@ -217,7 +207,6 @@ namespace UIObject {
 
         is >> type >> param;
         while (type != "</Background>") {
-            std::cout << "<private> [createBackground] read > " << type << " " << param << std::endl;
             vec = Tool::atovec(param);
             if (type == "txtr:") {
                 id = std::atoi(param.c_str());
@@ -244,13 +233,11 @@ namespace UIObject {
                 is >> param;
             }
         }
-        std::cout << "<private> [createBackground] - end -" << std::endl;
         return Err::Code::NONE;
     }
 
     Err::Code Menu::createAnimation(std::ifstream &is, Core::Data &data)
     {
-        std::cout << "<private> [createAnimation] - start -" << std::endl;
         std::string type;
         std::string param;
         int id;
@@ -263,7 +250,6 @@ namespace UIObject {
 
         is >> type >> param;
         while (type != "</Anim>") {
-            std::cout << "<private> [createAnimation] read > " << type << " " << param << std::endl;
             if (type == "txtr:") {
                 id = std::atoi(param.c_str());
                 if (id < 0 || (int)data.getTexture().size() < id) {
@@ -296,7 +282,6 @@ namespace UIObject {
                 is >> param;
             }
         }
-        std::cout << "<private> [createAnimation] - end -" << std::endl;
         return Err::Code::NONE;
     }
 

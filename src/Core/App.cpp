@@ -17,25 +17,19 @@ namespace Core {
         m_view(sf::Vector2f(SIZE_X / 2, SIZE_Y / 2) , sf::Vector2f(SIZE_X, SIZE_Y)), // Change Zoom here
         m_data("./bin/data.config"), m_menu(), m_engine(m_data)
     {
-        std::cout << "[APP]::[constructor]" << std::endl;
-        std::cout << m_view.getViewport().left << std::endl;
         m_music = true;
         m_screen.setView(m_view);
         m_screen.setFramerateLimit(60);
         m_menu.load("./bin/menu/main.omn", m_data);
-        m_musicplayer.openFromFile("./bin/asset/MainMenu/title_screen.wav");
     }
 
     App::~App()
     {
-        std::cout << "[APP]::[destructor]" << std::endl;
     }
 
     // Gestion of Object
     int App::run()
     {
-        std::cout << "[APP]::[run] - start -" << std::endl;
-
         m_musicplayer.play();
 
         while (m_screen.isOpen()) {
@@ -48,7 +42,6 @@ namespace Core {
             this->updateDisplay();
             this->display();
         }
-        std::cout << "[APP]::[run] - end -" << std::endl;
         return 0;
     }
 
@@ -56,12 +49,10 @@ namespace Core {
         switch (m_menu.updateEvent(m_screen, m_event))
         {
         case 0:
-            std::cout << "Pressing START button" << std::endl;
             m_menu.clear();
             m_menu.load("./bin/menu/LevelSelector.omn", m_data);
             break;
         case 1:
-            std::cout << "Pressing SETTINGS button" << std::endl;
             if (m_music == false) {
                 m_menu.clear();
                 m_menu.load("./bin/settings/settings_off.omn", m_data);
@@ -71,7 +62,6 @@ namespace Core {
             }
             break;
         case 2:
-            std::cout << "Pressing QUIT button" << std::endl;
             m_screen.close();
             break;
         case 3:

@@ -45,7 +45,7 @@ namespace Tool {
         sf::Vector2f vec;
 
         if (split.size() != 2) {
-            std::cout << "[atovec] Error: to much element" << std::endl;
+            std::cerr << "[atovec] Error: to much element" << std::endl;
             return { 0, 0 };
         }
         vec = { static_cast<float>(std::atof(split.at(0).c_str())), static_cast<float>(std::atof(split.at(1).c_str())) };

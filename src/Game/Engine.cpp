@@ -21,7 +21,6 @@ namespace Game {
         std::string arg;
 
         m_scene.clear();
-        std::cout << "[Engine]::[load] - start -" << std::endl;
         if (!file)
             throw std::string("Can't open file: " + config);
         file >> param >> arg;
@@ -39,7 +38,6 @@ namespace Game {
         loadScene(file, data);
         if (m_scene.size() != 3)
             throw std::string("No much scene (need 3 got " + std::to_string(m_scene.size()) + ")");
-        std::cout << "[Engine]::[load] - End -" << std::endl;
         m_isload = true;
     }
 
@@ -78,7 +76,6 @@ namespace Game {
         m_scene.emplace_back(std::make_unique<Scene>(m_dim, m_tile_dim));
         while (!file.eof()) {
             file >> param;
-            std::cout << "<private> [loadScene] read > " << param << std::endl;
             if (param == "<platform>") {
                 m_scene.back()->setTilePlatform(readTile(file, "</platform>"));
                 continue;
@@ -86,7 +83,6 @@ namespace Game {
                 break;
             }
             file >> arg;
-            std::cout << "<private> [loadScene] with > " << arg << std::endl;
             if (param == "asset_bg:") {
                 m_scene.back()->setTextureBackground(data.getTexture().at(std::atoi(arg.c_str())));
             } else if (param == "asset_plat:") {
@@ -106,13 +102,10 @@ namespace Game {
         while (line != breaker) {
             std::vector<int> res;
 
-            std::cout << "<private> [readTile] read > " << line << std::endl;
             rsplit = Tool::split(line, ':');
             for (std::string n : rsplit) {
-                std::cout << n << " ";
                 res.emplace_back(std::atoi(n.c_str()) - 1);
             }
-            std::cout << std::endl;
             if (res.size() != m_dim.x) {
                 throw std::string("Invalide tile map size");
             }
