@@ -16,3 +16,10 @@ txtr: 9
 pos: 20;960
 rotate: 0
 </Button>
+
+<Button>
+id: 62
+txtr: 17
+pos: 480;960
+rotate: 0
+</Button>

@@ -30,3 +30,17 @@ txtr: 4
 pos: 810;730
 rotate: 0
 </Button>
+
+<Button>
+id: 50
+txtr: 19
+pos: 430;950
+rotate: 0
+</Button>
+
+<Button>
+id: 51
+txtr: 18
+pos: 440;90
+rotate: 0
+</Button>
