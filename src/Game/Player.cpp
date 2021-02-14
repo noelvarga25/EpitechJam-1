@@ -19,7 +19,7 @@ namespace Game
         _leftPressed = false;
         _rightPressed = false;
         _playerState = Idle;
-        m_sprt.setTexture(data.getTexture().at(10));
+        m_sprt.setTexture(data.getTexture().at(14));
         m_sprt.setTextureRect(sf::IntRect(0, 32, 32, 32));
         setScale(2, 2);
     }
