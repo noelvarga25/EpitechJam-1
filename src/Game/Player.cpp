@@ -39,7 +39,52 @@ namespace Game
         return _state;
     }
 
-    void Player::moveLeft()
+    sf::Vector2f Player::getCenterPosition() const
+    {
+         sf::Vector2f pos = getPosition();
+
+         pos.x += 32;
+         pos.y += 32;
+         return pos;
+    }
+
+    std::vector<std::vector<int>> getTileAround(std::vector<std::vector<int>> tile, sf::Vector2f pos)
+    {
+        sf::Vector2f tilePos;
+        std::vector<std::vector<int>> tileAround;
+        int x = 0;
+        int y = 0;
+
+        for (; y != tile.size() - 1; y += 1)
+            if (y * 32 < pos.y - 32 && y * 32 >= pos.y)
+                break;
+        for (; x != tile.at(y).size() - 1; x += 1)
+            if (x * 32 < pos.x - 32 && x * 32 >= pos.x)
+                break;
+        if (y != 0)
+            tileAround.push_back({tile.at(y - 1).at(x - 1), tile.at(y - 1).at(x), tile.at(y - 1).at(x + 1), tile.at(y - 1).at(x + 2)});
+        else
+            tileAround.push_back({-2, -2, -2, -2});
+        if (x != 0) {
+            if (x + 2 == tile.at(y).size()) {
+                tileAround.push_back({tile.at(y).at(x - 1), -2});
+                tileAround.push_back({tile.at(y + 1).at(x - 1), -2});
+            } else {
+                tileAround.push_back({tile.at(y).at(x - 1), tile.at(y).at(x + 2)});
+                tileAround.push_back({tile.at(y + 1).at(x - 1), tile.at(y + 1).at(x + 2)});
+            }
+        } else {
+            tileAround.push_back({-2, tile.at(y).at(x + 2)});
+            tileAround.push_back({-2, tile.at(y + 1).at(x + 2)});
+        }
+        if (y + 2 != tile.size())
+            tileAround.push_back({tile.at(y + 2).at(x - 1), tile.at(y + 2).at(x), tile.at(y + 2).at(x + 1), tile.at(y + 2).at(x + 2)});
+        else
+            tileAround.push_back({-2, -2, -2, -2});
+        return tileAround;
+    }
+
+    void Player::moveLeft(std::vector<std::vector<int>> tile)
     {
         sf::Time time = _animClock.getElapsedTime();
 
@@ -53,7 +98,7 @@ namespace Game
         move(-SPEED, 0);
     }
 
-    void Player::moveRight()
+    void Player::moveRight(std::vector<std::vector<int>> tile)
     {
         sf::Time time = _animClock.getElapsedTime();
 
@@ -75,7 +120,7 @@ namespace Game
         return v;
     }
 
-    void Player::jump()
+    void Player::jump(std::vector<std::vector<int>> tile)
     {
         sf::Time time = _jumpClock.getElapsedTime();
         sf::Time timeA = _animClock.getElapsedTime();
@@ -106,7 +151,7 @@ namespace Game
         }
     }
 
-    void Player::fall()
+    void Player::fall(std::vector<std::vector<int>> tile)
     {
         if (_jump == Fall || _jump == DoubleFall) {
             _animRect.left = 416;
