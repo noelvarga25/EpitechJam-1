@@ -19,6 +19,7 @@ namespace Core {
     {
         std::cout << "[APP]::[constructor]" << std::endl;
         m_screen.setView(m_view);
+        m_screen.setFramerateLimit(60);
         m_menu.load("./bin/menu/main.omn", m_data);
     }
 
