@@ -1,0 +1,25 @@
+<Background>
+txtr: 10
+pos: 0;0
+</Background>
+
+<Button>
+id: 21
+txtr: 12
+pos: 860;440
+rotate: 0
+</Button>
+
+<Button>
+id: 22
+txtr: 12
+pos: 860;440
+rotate: 0
+</Button>
+
+<Button>
+id: 6
+txtr: 9
+pos: 20;960
+rotate: 0
+</Button>

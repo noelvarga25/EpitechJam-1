@@ -18,9 +18,11 @@ namespace Core {
         m_data("./bin/data.config"), m_menu(), m_engine(m_data)
     {
         std::cout << "[APP]::[constructor]" << std::endl;
+        m_music = true;
         m_screen.setView(m_view);
         m_screen.setFramerateLimit(60);
         m_menu.load("./bin/menu/main.omn", m_data);
+        m_musicplayer.openFromFile("./bin/asset/MainMenu/title_screen.wav");
     }
 
     App::~App()
@@ -33,10 +35,7 @@ namespace Core {
     {
         std::cout << "[APP]::[run] - start -" << std::endl;
 
-        sf::Music music;
-        if(!music.openFromFile("./bin/asset/MainMenu/title_screen.wav"))
-            return -1;
-        music.play();
+        m_musicplayer.play();
 
         while (m_screen.isOpen()) {
             while (m_screen.pollEvent(m_event)) {
@@ -62,7 +61,13 @@ namespace Core {
             break;
         case 1:
             std::cout << "Pressing SETTINGS button" << std::endl;
-            /* Go to settings */
+            if (m_music == false) {
+                m_menu.clear();
+                m_menu.load("./bin/settings/settings_off.omn", m_data);
+            } else {
+                m_menu.clear();
+                m_menu.load("./bin/settings/settings.omn", m_data);
+            }
             break;
         case 2:
             std::cout << "Pressing QUIT button" << std::endl;
@@ -92,6 +97,18 @@ namespace Core {
         case 6:
             m_menu.clear();
             m_menu.load("./bin/menu/main.omn", m_data);
+            break;
+        case 20:
+            m_music = false;
+            m_musicplayer.stop();
+            m_menu.clear();
+            m_menu.load("./bin/settings/settings_off.omn", m_data);
+            break;
+        case 21:
+            m_music = true;
+            m_musicplayer.play();
+            m_menu.clear();
+            m_menu.load("./bin/settings/settings.omn", m_data);
             break;
         default:
             break;

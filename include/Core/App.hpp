@@ -34,5 +34,7 @@ namespace Core {
             Core::Data m_data;
             UIObject::Menu m_menu;
             Game::Engine m_engine;
+            sf::Music m_musicplayer;
+            bool m_music;
     };
 }
