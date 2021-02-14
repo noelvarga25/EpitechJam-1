@@ -46,7 +46,7 @@ namespace Game
             void jump();
             void fall();
             int updateEvent(sf::RenderWindow &screen, sf::Event event) override;
-            void updatePos();
+            void updatePos(std::vector<std::vector<int>> tile);
             void idleAnim();
 
         protected:
@@ -59,7 +59,6 @@ namespace Game
             bool _rightPressed;
             bool _leftPressed;
             bool _spacePressed;
-
     };
 
 }

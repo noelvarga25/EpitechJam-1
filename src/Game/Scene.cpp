@@ -49,4 +49,8 @@ namespace Game {
         m_rdTxtr.display();
         m_sprt.setTexture(m_rdTxtr.getTexture());
     }
+
+    std::vector<std::vector<int>> Scene::getTile() {
+        return m_platform;
+    }
 }

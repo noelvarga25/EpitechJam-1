@@ -24,6 +24,7 @@ namespace Game {
             void setTexturePlatform(sf::Texture &txtr);
             void setTilePlatform(std::vector<std::vector<int>> tile);
             void init();
+            std::vector<std::vector<int>> getTile();
         private:
             sf::Sprite m_sbg;
             std::vector<std::vector<int>> m_platform;

@@ -29,5 +29,6 @@ namespace Game {
             sf::Vector2i m_tile_dim;
             Game::Player m_player;
             bool m_isload;
+            time m_time;
     };
 }

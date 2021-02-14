@@ -19,6 +19,7 @@ namespace Game {
         std::string param;
         std::string arg;
 
+        m_scene.clear();
         std::cout << "[Engine]::[load] - start -" << std::endl;
         if (!file)
             throw std::string("Can't open file: " + config);
@@ -46,7 +47,7 @@ namespace Game {
     }
 
     void Engine::updateDisplay() {
-        m_player.updatePos();
+        m_player.updatePos(m_scene.at((int)m_time)->getTile());
     }
 
     bool Engine::isLoad() const {

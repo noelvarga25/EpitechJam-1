@@ -191,7 +191,7 @@ namespace Game
         }
     }
 
-    void Player::updatePos()
+    void Player::updatePos(std::vector<std::vector<int>> tile)
     {
         if (_jump == None && _leftPressed == false && _rightPressed == false) {
             _playerState = Idle;
