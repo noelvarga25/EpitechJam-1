@@ -31,7 +31,7 @@ NAME		=	"Monkey Time Warp 3"
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-			g++ -o $(NAME) $(OBJ) -lsfml-graphics -lsfml-window -lsfml-system
+			g++ -o $(NAME) $(OBJ) -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 
 windows:
 			g++ -o $(NAME) $(OBJ) -ISFML-WIN/include -LSFML-WIN/lib -lsfml-graphics -lsfml-window -lsfml-system

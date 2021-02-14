@@ -33,6 +33,11 @@ namespace Core {
     {
         std::cout << "[APP]::[run] - start -" << std::endl;
 
+        sf::Music music;
+        if(!music.openFromFile("./bin/asset/MainMenu/title_screen.wav"))
+            return -1;
+        music.play();
+
         while (m_screen.isOpen()) {
             while (m_screen.pollEvent(m_event)) {
                 if (m_event.type == sf::Event::Closed) {

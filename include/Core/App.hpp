@@ -11,6 +11,7 @@
 #include <Core/Data.hpp>
 #include <UIObject/Menu.hpp>
 #include "Game/Engine.hpp"
+#include <SFML/Audio.hpp>
 
 #define SIZE_X 1920
 #define SIZE_Y 1080
