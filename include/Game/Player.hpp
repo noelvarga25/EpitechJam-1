@@ -38,7 +38,7 @@ namespace Game
             virtual ~Player();
 
             time getTimeState() const;
-            sf::Vector2f getCenterPosition() const;
+            sf::Vector2f getCenterPosition();
             std::vector<std::vector<int>> getTileAround(std::vector<std::vector<int>> tile, sf::Vector2f pos);
 
             void setTimeState(time newState);

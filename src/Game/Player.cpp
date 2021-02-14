@@ -39,32 +39,36 @@ namespace Game
         return _state;
     }
 
-    sf::Vector2f Player::getCenterPosition() const
+    sf::Vector2f Player::getCenterPosition()
     {
-         sf::Vector2f pos = getPosition();
+         sf::Vector2f pos = this->getPosition();
 
          pos.x += 32;
          pos.y += 32;
          return pos;
     }
 
-    std::vector<std::vector<int>> getTileAround(std::vector<std::vector<int>> tile, sf::Vector2f pos)
+    std::vector<std::vector<int>> Player::getTileAround(std::vector<std::vector<int>> tile, sf::Vector2f pos)
     {
         sf::Vector2f tilePos;
         std::vector<std::vector<int>> tileAround;
         int x = 0;
         int y = 0;
 
+        std::cout << "je crash pas" << std::endl;
         for (; y != tile.size() - 1; y += 1)
-            if (y * 32 < pos.y - 32 && y * 32 >= pos.y)
+            if (y * 32 >= pos.y - 32 && y * 32 < pos.y)
                 break;
-        for (; x != tile.at(y).size() - 1; x += 1)
-            if (x * 32 < pos.x - 32 && x * 32 >= pos.x)
+        for (; x != tile.at(y).size() - 1; x += 1) {
+            if (x * 32 >= pos.x - 32 && x * 32 < pos.x)
                 break;
+        }
+        std::cout << "je ne crash pas 1" << std::endl;
         if (y != 0)
-            tileAround.push_back({tile.at(y - 1).at(x - 1), tile.at(y - 1).at(x), tile.at(y - 1).at(x + 1), tile.at(y - 1).at(x + 2)});
+            tileAround.push_back({ tile.at(y - 1).at(x), tile.at(y - 1).at(x + 1)});
         else
-            tileAround.push_back({-2, -2, -2, -2});
+            tileAround.push_back({-2, -2});
+        std::cout << "je ne crash pas 2" << std::endl;
         if (x != 0) {
             if (x + 2 == tile.at(y).size()) {
                 tileAround.push_back({tile.at(y).at(x - 1), -2});
@@ -78,9 +82,10 @@ namespace Game
             tileAround.push_back({-2, tile.at(y + 1).at(x + 2)});
         }
         if (y + 2 != tile.size())
-            tileAround.push_back({tile.at(y + 2).at(x - 1), tile.at(y + 2).at(x), tile.at(y + 2).at(x + 1), tile.at(y + 2).at(x + 2)});
+            tileAround.push_back({tile.at(y + 2).at(x), tile.at(y + 2).at(x + 1)});
         else
-            tileAround.push_back({-2, -2, -2, -2});
+            tileAround.push_back({-2, -2});
+        std::cout << "je crash toujours pas" << std::endl;
         return tileAround;
     }
 
@@ -88,28 +93,32 @@ namespace Game
     {
         sf::Time time = _animClock.getElapsedTime();
 
-        if (time.asSeconds() > 0.05) {
-            _animRect.left += 32;
-            if (_animRect.left >= 608)
-                _animRect.left = 0;
-            setTextureRect(_animRect);
-            _animClock.restart();
+        if (tile.at(1).at(0) < 0 && tile.at(1).at(0) != -2) {
+            if (time.asSeconds() > 0.05) {
+                _animRect.left += 32;
+                if (_animRect.left >= 608)
+                    _animRect.left = 0;
+                setTextureRect(_animRect);
+             _animClock.restart();
+            }
+            move(-SPEED, 0);
         }
-        move(-SPEED, 0);
     }
 
     void Player::moveRight(std::vector<std::vector<int>> tile)
     {
         sf::Time time = _animClock.getElapsedTime();
 
-        if (time.asSeconds() > 0.05) {
-            _animRect.left += 32;
-            if (_animRect.left >= 608)
-                _animRect.left = 0;
-            setTextureRect(_animRect);
-            _animClock.restart();
+        if (tile.at(1).at(1) < 0 && tile.at(1).at(1) != -2) {
+            if (time.asSeconds() > 0.05) {
+                _animRect.left += 32;
+                if (_animRect.left >= 608)
+                    _animRect.left = 0;
+                setTextureRect(_animRect);
+                _animClock.restart();
+            }
+            move(SPEED, 0);
         }
-        move(SPEED, 0);
     }
 
     float velocity(sf::Time time)
@@ -238,18 +247,20 @@ namespace Game
 
     void Player::updatePos(std::vector<std::vector<int>> tile)
     {
+        std::vector<std::vector<int>> tileAround = getTileAround(tile, getCenterPosition());
+
         if (_jump == None && _leftPressed == false && _rightPressed == false) {
             _playerState = Idle;
             _animRect.top = 32;
         }
         if (_jump == Jump || _jump == DoubleJump)
-            jump();
+            jump(tileAround);
         else
-            fall();
+            fall(tileAround);
         if (_rightPressed == true && _leftPressed == false)
-            moveRight();
+            moveRight(tileAround);
         if (_leftPressed == true && _rightPressed == false)
-            moveLeft();
+            moveLeft(tileAround);
         if (_playerState == Idle)
             idleAnim();
     }
