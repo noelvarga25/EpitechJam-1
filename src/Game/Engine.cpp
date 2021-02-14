@@ -10,6 +10,7 @@
 namespace Game {
     Engine::Engine(Core::Data &data) : m_player(data) {
         m_isload = false;
+        m_time = time::Present;
     }
 
     Engine::~Engine() {}
@@ -102,7 +103,7 @@ namespace Game {
             rsplit = Tool::split(line, ':');
             for (std::string n : rsplit) {
                 std::cout << n << " ";
-                res.emplace_back(std::atoi(n.c_str()) - 1);
+                res.emplace_back(std::atoi(n.c_str()) - 641);
             }
             std::cout << std::endl;
             if (res.size() != m_dim.x) {

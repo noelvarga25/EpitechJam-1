@@ -6,7 +6,7 @@
 */
 
 #include "Game/Scene.hpp"
-
+#include <math.h>
 namespace Game {
     Scene::Scene(sf::Vector2i dim, sf::Vector2i tile_dim) {
         m_dim = dim;
@@ -26,12 +26,13 @@ namespace Game {
     void Scene::setTilePlatform(std::vector<std::vector<int>> tile) {
         m_rplatform.create(m_dim.x * TILE_SIZE, m_dim.y * TILE_SIZE);
 
+        m_platform = tile;
         m_rplatform.clear(sf::Color(0, 0, 0, 0));
         for (int y = 0; y < m_dim.y; y++) {
             for (int x = 0; x < m_dim.x; x++) {
                 if (tile.at(y).at(x) == -1)
                     continue;
-                m_splatform.setTextureRect(sf::IntRect(sf::Vector2i((tile.at(y).at(x) % m_tile_dim.x) * TILE_SIZE,
+                m_splatform.setTextureRect(sf::IntRect(sf::Vector2i((tile.at(y).at(x) % m_tile_dim.y) * TILE_SIZE,
                     (tile.at(y).at(x) / m_tile_dim.y) * TILE_SIZE), sf::Vector2i(TILE_SIZE, TILE_SIZE)));
                 m_splatform.setPosition(x * TILE_SIZE, y * TILE_SIZE);
                 m_rplatform.draw(m_splatform);

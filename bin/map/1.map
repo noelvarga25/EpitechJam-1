@@ -1,5 +1,5 @@
 size:       150x34
-tile_size:  400x240
+tile_size:  240x400
 <past>
 asset_bg:    0
 asset_plat:  9
