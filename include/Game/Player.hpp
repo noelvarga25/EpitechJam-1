@@ -28,7 +28,8 @@ namespace Game
         Idle,
         Right,
         Left,
-        onJump
+        onJump,
+        onTimeWarp
     };
 
     class Player: public Core::Object
@@ -50,6 +51,7 @@ namespace Game
             int updateEvent(sf::RenderWindow &screen, sf::Event event) override;
             void updatePos(std::vector<std::vector<int>> tile);
             void idleAnim();
+            void TimeWarpAnim();
 
         protected:
             time _state;

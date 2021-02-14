@@ -106,8 +106,9 @@ namespace Game
 
         if (time.asSeconds() > 0.05) {
             _animRect.left += 32;
-            if (_animRect.left >= 608)
+            if (_animRect.left >= 608) {
                 _animRect.left = 0;
+            }
             setTextureRect(_animRect);
             _animClock.restart();
         }
@@ -192,6 +193,36 @@ namespace Game
                 setScale(2, 2);
                 _playerState = Right;
             }
+            if (event.key.code == sf::Keyboard::A && _jump == None && _playerState != onTimeWarp) {
+                if (_state == Present) {
+                    _animRect.top = 128;
+                    _animClock.restart();
+                    _animRect.left = 0;
+                    _state = Past;
+                    _playerState = onTimeWarp;
+                } else if (_state == Futur) {
+                    _animRect.top = 128;
+                    _animClock.restart();
+                    _animRect.left = 0;
+                    _state = Present;
+                    _playerState = onTimeWarp;
+                }
+            }
+            if (event.key.code == sf::Keyboard::E && _jump == None && _playerState != onTimeWarp) {
+                if (_state == Present) {
+                    _animRect.top = 128;
+                    _animClock.restart();
+                    _animRect.left = 0;
+                    _state = Futur;
+                    _playerState = onTimeWarp;
+                } else if (_state == Past) {
+                    _animRect.top = 128;
+                    _animClock.restart();
+                    _animRect.left = 0;
+                    _state = Present;
+                    _playerState = onTimeWarp;
+                }
+            }
             if (event.key.code == sf::Keyboard::Space) {
                 if (_jump == None) {
                     _jump = Jump;
@@ -212,7 +243,7 @@ namespace Game
         } else if (event.type == sf::Event::KeyReleased) {
             if (event.key.code == sf::Keyboard::Space) {
                _spacePressed = false;
-                if (_jump == None && _leftPressed == false && _rightPressed == false) {
+                if (_jump == None && _leftPressed == false && _rightPressed == false && _playerState != onTimeWarp) {
                     _playerState = Idle;
                     _animClock.restart();
                 }
@@ -239,11 +270,24 @@ namespace Game
         }
     }
 
+    void Player::TimeWarpAnim()
+    {
+        sf::Time time = _animClock.getElapsedTime();
+
+        if (time.asSeconds() > 0.05) {
+            _animRect.left += 32;
+            if (_animRect.left >= 128)
+                _playerState = Idle;
+            setTextureRect(_animRect);
+            _animClock.restart();
+        }
+    }
+
     void Player::updatePos(std::vector<std::vector<int>> tile)
     {
         std::vector<std::vector<int>> tileAround = getTileAround(tile, getCenterPosition());
 
-        if (_jump == None && _leftPressed == false && _rightPressed == false) {
+        if (_jump == None && _leftPressed == false && _rightPressed == false && _playerState != onTimeWarp) {
             _playerState = Idle;
             _animRect.top = 32;
         }
@@ -251,11 +295,13 @@ namespace Game
             jump(tileAround);
         else
             fall(tileAround);
-        if (_rightPressed == true && _leftPressed == false)
+        if (_rightPressed == true && _leftPressed == false && _playerState != onTimeWarp)
             moveRight(tileAround);
-        if (_leftPressed == true && _rightPressed == false)
+        if (_leftPressed == true && _rightPressed == false && _playerState != onTimeWarp)
             moveLeft(tileAround);
         if (_playerState == Idle)
             idleAnim();
+        if (_playerState == onTimeWarp)
+            TimeWarpAnim();
     }
 }
