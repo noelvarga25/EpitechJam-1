@@ -55,7 +55,7 @@ namespace Game {
         else if (m_player.getPosition().x > m_tile_dim.x * TILE_SIZE)
             posx = (m_tile_dim.x * TILE_SIZE) - SIZE_X;
         view->setCenter((sf::Vector2f(posx, SIZE_Y / 2)));
-        m_player.updatePos(m_scene.at((int)m_time)->getTile());
+        m_player.updatePos(m_scene.at(m_player.getTimeState())->getTile());
     }
 
     bool Engine::isLoad() const {
@@ -125,7 +125,7 @@ namespace Game {
     }
 
     void Engine::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-        target.draw(*m_scene.at(0), states);
+        target.draw(*m_scene.at(m_player.getTimeState()), states);
         target.draw(m_player);
     }
 }
