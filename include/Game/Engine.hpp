@@ -9,6 +9,9 @@
 #include "Scene.hpp"
 #include "Player.hpp"
 
+#define SIZE_X 1920
+#define SIZE_Y 1080
+
 namespace Game {
     class Engine : public sf::Drawable {
         public:
@@ -17,7 +20,7 @@ namespace Game {
             void load(std::string config, Core::Data &data);
             int run();
             void updateEvent(sf::RenderWindow &screen, sf::Event event);
-            void updateDisplay();
+            void updateDisplay(sf::View *view);
             bool isLoad() const;
             void clear();
         private:
