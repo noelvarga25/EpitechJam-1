@@ -33,12 +33,6 @@ namespace Core {
     {
         std::cout << "[APP]::[run] - start -" << std::endl;
 
-        try {
-            m_engine.load("./bin/map/1.map", m_data);
-        } catch (std::string &e) {
-            std::cout << e << std::endl;
-            return 84;
-        }
         while (m_screen.isOpen()) {
             while (m_screen.pollEvent(m_event)) {
                 if (m_event.type == sf::Event::Closed) {
@@ -70,10 +64,25 @@ namespace Core {
             m_screen.close();
             break;
         case 3:
+            try {
+                m_engine.load("./bin/map/1.map", m_data);
+            } catch (std::string &e) {
+                    std::cout << "An error occured while loading the map: " << e << std::endl;
+            }
             break;
         case 4:
+            try {
+                m_engine.load("./bin/map/1.map", m_data);
+            } catch (std::string &e) {
+                    std::cout << "An error occured while loading the map: " << e << std::endl;
+            }
             break;
         case 5:
+            try {
+                m_engine.load("./bin/map/1.map", m_data);
+            } catch (std::string &e) {
+                    std::cout << "An error occured while loading the map: " << e << std::endl;
+            }
             break;
         case 6:
             m_menu.clear();
