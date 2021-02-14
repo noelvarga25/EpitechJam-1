@@ -38,13 +38,15 @@ namespace Game
             virtual ~Player();
 
             time getTimeState() const;
+            sf::Vector2f getCenterPosition() const;
+            std::vector<std::vector<int>> getTileAround(std::vector<std::vector<int>> tile, sf::Vector2f pos);
 
             void setTimeState(time newState);
 
-            void moveLeft();
-            void moveRight();
-            void jump();
-            void fall();
+            void moveLeft(std::vector<std::vector<int>> tile);
+            void moveRight(std::vector<std::vector<int>> tile);
+            void jump(std::vector<std::vector<int>> tile);
+            void fall(std::vector<std::vector<int>> tile);
             int updateEvent(sf::RenderWindow &screen, sf::Event event) override;
             void updatePos(std::vector<std::vector<int>> tile);
             void idleAnim();
