@@ -34,7 +34,6 @@ namespace Game {
                 m_splatform.setTextureRect(sf::IntRect(sf::Vector2i((tile.at(y).at(x) % m_tile_dim.x) * TILE_SIZE,
                     (tile.at(y).at(x) / m_tile_dim.y) * TILE_SIZE), sf::Vector2i(TILE_SIZE, TILE_SIZE)));
                 m_splatform.setPosition(x * TILE_SIZE, y * TILE_SIZE);
-                std::cout << "pos: " << x * TILE_SIZE << " " << y * TILE_SIZE << std::endl;
                 m_rplatform.draw(m_splatform);
             }
         }
