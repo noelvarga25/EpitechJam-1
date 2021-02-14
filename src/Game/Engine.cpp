@@ -8,7 +8,9 @@
 #include "Game/Engine.hpp"
 
 namespace Game {
-    Engine::Engine() {}
+    Engine::Engine(Core::Data &data) : m_player(data) {
+        m_isload = false;
+    }
 
     Engine::~Engine() {}
 
@@ -36,12 +38,24 @@ namespace Game {
         if (m_scene.size() != 3)
             throw std::string("No much scene (need 3 got " + std::to_string(m_scene.size()) + ")");
         std::cout << "[Engine]::[load] - End -" << std::endl;
+        m_isload = true;
     }
 
-    int Engine::run() {
-        if (m_scene.size() != 3)
-            return 84;
-        return 0;
+    void Engine::updateEvent(sf::RenderWindow &screen, sf::Event event) {
+        m_player.updateEvent(screen, event);
+    }
+
+    void Engine::updateDisplay() {
+        m_player.updatePos();
+    }
+
+    bool Engine::isLoad() const {
+        return m_isload;
+    }
+
+    void Engine::clear() {
+        m_scene.clear();
+        m_isload = false;
     }
 
     void Engine::loadScene(std::ifstream &file, Core::Data &data) {
@@ -103,5 +117,6 @@ namespace Game {
 
     void Engine::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         target.draw(*m_scene.at(0), states);
+        target.draw(m_player);
     }
 }

@@ -9,6 +9,7 @@
 
 #include "Core/Object.hpp"
 #include "Game/TimeStamp.hpp"
+#include "Core/Data.hpp"
 #define SPEED 10
 
 namespace Game
@@ -33,7 +34,7 @@ namespace Game
     class Player: public Core::Object
     {
         public:
-            Player();
+            Player(Core::Data &data);
             virtual ~Player();
 
             time getTimeState() const;

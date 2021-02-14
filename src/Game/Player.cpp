@@ -11,7 +11,7 @@
 namespace Game
 {
 
-    Player::Player(): _jumpClock(), _animClock(), _animRect(0, 32, 32, 32), Object()
+    Player::Player(Core::Data &data): _jumpClock(), _animClock(), _animRect(0, 32, 32, 32), Object()
     {
         _jump = None;
         _state = Present;
@@ -19,6 +19,8 @@ namespace Game
         _leftPressed = false;
         _rightPressed = false;
         _playerState = Idle;
+        m_sprt.setTexture(data.getTexture().at(10));
+        m_sprt.setTextureRect(sf::IntRect(0, 32, 32, 32));
     }
 
     Player::~Player()

@@ -14,6 +14,7 @@ SRC			=	$(P_CORE)/Data.cpp \
 				$(P_CORE)/App.cpp \
 				$(P_GAME)/Engine.cpp \
 				$(P_GAME)/Scene.cpp \
+				$(P_GAME)/Player.cpp \
 				$(P_UIOBJECT)/Anim.cpp \
 				$(P_UIOBJECT)/Button.cpp \
 				$(P_UIOBJECT)/Entry.cpp \

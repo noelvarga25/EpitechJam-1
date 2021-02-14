@@ -7,20 +7,19 @@
 
 #pragma once
 #include "Scene.hpp"
+#include "Player.hpp"
 
 namespace Game {
-    enum Time {
-        Past,
-        Present,
-        Futur
-    };
-
     class Engine : public sf::Drawable {
         public:
-            Engine();
+            Engine(Core::Data &data);
             ~Engine();
             void load(std::string config, Core::Data &data);
             int run();
+            void updateEvent(sf::RenderWindow &screen, sf::Event event);
+            void updateDisplay();
+            bool isLoad() const;
+            void clear();
         private:
             void loadScene(std::ifstream &file, Core::Data &data);
             virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -28,6 +27,7 @@ namespace Game {
             std::vector<std::unique_ptr<Scene>> m_scene;
             sf::Vector2i m_dim;
             sf::Vector2i m_tile_dim;
-            // player
+            Game::Player m_player;
+            bool m_isload;
     };
 }

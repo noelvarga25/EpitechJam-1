@@ -15,7 +15,7 @@ namespace Core {
     App::App() :
         m_screen(sf::VideoMode(SIZE_X, SIZE_Y), "Monkey Time Warp 3"),
         m_view(sf::Vector2f(SIZE_X / 2, SIZE_Y / 2) , sf::Vector2f(SIZE_X * 1, SIZE_Y * 1)), // Change Zoom here
-        m_data("./bin/data.config"), m_menu()
+        m_data("./bin/data.config"), m_menu(), m_engine(m_data)
     {
         std::cout << "[APP]::[constructor]" << std::endl;
         m_screen.setView(m_view);
@@ -81,17 +81,25 @@ namespace Core {
         default:
             break;
         }
+        if (m_engine.isLoad()) {
+            m_engine.updateEvent(m_screen, m_event);
+        }
     }
 
     void App::updateDisplay() {
         m_menu.updateDisplay();
+        if (m_engine.isLoad()) {
+            m_engine.updateDisplay();
+        }
     }
 
     void App::display()
     {
         m_screen.clear(sf::Color::White);
         m_screen.draw(m_menu);
-        m_screen.draw(m_engine);
+        if (m_engine.isLoad()) {
+            m_screen.draw(m_engine);
+        }
         m_screen.display();
     }
 }
