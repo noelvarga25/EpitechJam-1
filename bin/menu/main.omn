@@ -4,22 +4,29 @@ pos: 0;0
 </Background>
 
 <Button>
-id: 0
+id: 999
 txtr: 1
-pos: 660;170
+pos: 504;250
+rotate: 0
+</Button>
+
+<Button>
+id: 0
+txtr: 2
+pos: 810;490
 rotate: 0
 </Button>
 
 <Button>
 id: 1
-txtr: 2
-pos: 660;470
+txtr: 3
+pos: 810;610
 rotate: 0
 </Button>
 
 <Button>
 id: 2
-txtr: 3
-pos: 660;770
+txtr: 4
+pos: 810;730
 rotate: 0
 </Button>
