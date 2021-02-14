@@ -14,10 +14,11 @@ namespace Core {
     // Construction of Object
     App::App() :
         m_screen(sf::VideoMode(SIZE_X, SIZE_Y), "Monkey Time Warp 3"),
-        m_view(sf::Vector2f(SIZE_X / 2, SIZE_Y / 2) , sf::Vector2f(SIZE_X * 1, SIZE_Y * 1)), // Change Zoom here
+        m_view(sf::Vector2f(SIZE_X / 2, SIZE_Y / 2) , sf::Vector2f(SIZE_X, SIZE_Y)), // Change Zoom here
         m_data("./bin/data.config"), m_menu(), m_engine(m_data)
     {
         std::cout << "[APP]::[constructor]" << std::endl;
+        std::cout << m_view.getViewport().left << std::endl;
         m_music = true;
         m_screen.setView(m_view);
         m_screen.setFramerateLimit(60);
@@ -121,7 +122,8 @@ namespace Core {
     void App::updateDisplay() {
         m_menu.updateDisplay();
         if (m_engine.isLoad()) {
-            m_engine.updateDisplay();
+            m_engine.updateDisplay(&m_view);
+            m_screen.setView(m_view);
         }
     }
 

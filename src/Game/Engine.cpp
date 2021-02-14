@@ -47,7 +47,14 @@ namespace Game {
         m_player.updateEvent(screen, event);
     }
 
-    void Engine::updateDisplay() {
+    void Engine::updateDisplay(sf::View *view) {
+        float posx = m_player.getCenterPosition().x;
+
+        if (posx < SIZE_X / 2)
+            posx = SIZE_X / 2;
+        else if (m_player.getPosition().x > m_tile_dim.x * TILE_SIZE)
+            posx = (m_tile_dim.x * TILE_SIZE) - SIZE_X;
+        view->setCenter((sf::Vector2f(posx, SIZE_Y / 2)));
         m_player.updatePos(m_scene.at((int)m_time)->getTile());
     }
 
