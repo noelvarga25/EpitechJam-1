@@ -82,7 +82,7 @@ namespace Game
         if (time.asSeconds() < 0.5) {
             move(0, velocity(time));
             if (_jump == Jump && timeA.asSeconds() > 0.05) {
-                if (_animRect.left < 416)
+                if (_animRect.left < 384)
                     _animRect.left += 32;
                 setTextureRect(_animRect);
             } else if (_jump == DoubleJump && timeA.asSeconds() > 0.05) {
@@ -194,7 +194,6 @@ namespace Game
     {
         if (_jump == None && _leftPressed == false && _rightPressed == false) {
             _playerState = Idle;
-            _animRect.left = 0;
             _animRect.top = 32;
         }
         if (_jump == Jump || _jump == DoubleJump)
